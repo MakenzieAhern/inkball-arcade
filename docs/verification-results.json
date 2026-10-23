@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-23",
+  "environment": {
+    "os": "macOS",
+    "java": "Microsoft OpenJDK 17.0.16",
+    "gradle": "8.8",
+    "processing": "4.5.7"
+  },
+  "command": "./gradlew clean build installDist -PcaptureScreenshots --no-daemon",
+  "tests": {
+    "tests": 66,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "inkball.AppTest",
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.BallTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.BrickTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.GameResourcesTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.GameScreenshotTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.HoleTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "inkball.LineTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "coverage": {
+    "instruction": {
+      "covered": 3449,
+      "missed": 330,
+      "percent": 91.27
+    },
+    "branch": {
+      "covered": 353,
+      "missed": 100,
+      "percent": 77.92
+    },
+    "line": {
+      "covered": 648,
+      "missed": 63,
+      "percent": 91.14
+    },
+    "complexity": {
+      "covered": 216,
+      "missed": 96,
+      "percent": 69.23
+    },
+    "method": {
+      "covered": 72,
+      "missed": 4,
+      "percent": 94.74
+    },
+    "class": {
+      "covered": 6,
+      "missed": 0,
+      "percent": 100.0
+    }
+  },
+  "packaged_launch": {
+    "jar": "passed: remained running for 6 seconds from an unrelated temporary directory",
+    "installed_distribution": "passed: remained running for 6 seconds from an unrelated temporary directory"
+  }
+}

@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'inkball'
+version = '1.0.0'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    implementation('org.processing:core:4.5.7') {
+        // This game uses Java2D, not the optional OpenGL renderers.
+        exclude group: 'org.jogamp.jogl'
+        exclude group: 'org.jogamp.gluegen'
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+}
+
+application { mainClass = 'inkball.App' }
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+
+tasks.withType(JavaExec).configureEach {
+    systemProperty 'file.encoding', 'UTF-8'
+    if (System.getProperty('inkball.config')) {
+        systemProperty 'inkball.config', System.getProperty('inkball.config')
+    }
+}
+
+// Default levels travel with the application, including packaged distributions.
+processResources {
+    from(projectDir) { include 'config.json', 'level*.txt' }
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'file.encoding', 'UTF-8'
+    if (project.hasProperty('captureScreenshots')) {
+        systemProperty 'inkball.captureScreenshots', 'true'
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacoco { toolVersion = '0.8.12' }
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+// Preserve the convenient single-JAR launch option with bundled default assets.
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest { attributes 'Main-Class': 'inkball.App' }
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+    exclude 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
+}
